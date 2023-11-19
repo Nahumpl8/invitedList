@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./css/style.css">
+</head>
+<body>
+    <h1>Lista de invitados</h1>
+    <div class="invitados"></div>
+    <script>
+        
+        const lista = document.querySelector("div");
+
+        fetch("/invitados")
+        .then(respuesta => respuesta.json())
+        .then(invitados => {
+            console.log(invitados)
+            invitados.forEach(({nombre,contraseña,numeroInvitados,_id}) => {
+                let invitedArea = document.createElement('div');
+                invitedArea.classList.add('area_invitado')
+                let nameSpot = document.createElement('h2');
+                nameSpot.classList.add('nombre_invitado')
+                let passSpot = document.createElement('h3');
+                passSpot.classList.add('contra_invitado')
+                let numSpot = document.createElement('h4');
+                numSpot.classList.add('num_invitados')
+                let enlace = document.createElement("a");
+                enlace.classList.add('id_invitado')
+
+                nameSpot.innerHTML = `${nombre}`
+                passSpot.innerHTML = `Contraseña: ${contraseña}`
+                numSpot.innerHTML = `Acompañantes: ${numeroInvitados}`
+                enlace.innerHTML = `Id: ${_id}`
+
+                invitedArea.appendChild(nameSpot);
+                invitedArea.appendChild(passSpot);
+                invitedArea.appendChild(numSpot);
+                invitedArea.appendChild(enlace);
+                lista.appendChild(invitedArea);
+
+            });
+        })
+        .catch(error => {
+        console.error("Error al cargar invitados, este es el error:", error);
+        });
+    </script>
+</body>
+</html>
