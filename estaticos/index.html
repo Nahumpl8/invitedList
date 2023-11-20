@@ -13,7 +13,7 @@
         
         const lista = document.querySelector("div");
 
-        fetch("/invitados")
+        fetch("https://invitadosweddingcn.onrender.com/invitados")
         .then(respuesta => respuesta.json())
         .then(invitados => {
             console.log(invitados)
