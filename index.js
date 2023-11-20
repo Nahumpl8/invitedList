@@ -3,7 +3,7 @@ const {invitados} = require("./db.js")
 const app = express();
 
 
-const port = 3000;
+let port = process.env.PORT;
 
 app.use("/", express.static("./estaticos"));
 
